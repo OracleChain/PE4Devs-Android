@@ -5,6 +5,7 @@ Adaptation tool for PocketEOS dapps developers.
 进入页面需要检测User-Agent（android为：“PocketEosAndroid”，ios为“PocketEosIos”）判断加载页面来源是PocketEosAndroid或者是PocketEosIos
 
 Android端：
+
 整个交互JsInterface   name（the name used to expose the object in JavaScript） 为：DappJsBridge
 
 
@@ -15,11 +16,13 @@ JS端声明方法，传递数据。方法名：getEosAccountDetails（String acc
 备注:该方法，无论采用什么前端框架，都需要暴露在window全局下。account以String形式传递
 
 eg：  
+
    //获取移动端选择的eos账号
    
    function getEosAccount(String account){
     
   }
+  
 1-2：Dapp进入获取钱包信息以及选中账号
 
 JS端声明方法，传递数据。方法名：getWalletWithAccount（String detail） 
