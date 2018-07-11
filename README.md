@@ -27,7 +27,13 @@ eg：
     
   }
   detail：
-  {"phone":"13900000000","account":"oraclechain4","uid":"46eec3f33e3d86a40c914a591922f420","wallet_name":"haha","image":""}
+ {
+	"phone": "13900000000",
+	"account": "oraclechain4",
+	"uid": "46eec3f33e3d86a40c914a591922f420",
+	"wallet_name": "haha",
+	"image": ""
+}
 2-1：签名实现OCT或者EOS转账
  
 
