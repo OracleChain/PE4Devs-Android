@@ -22,7 +22,7 @@
         </activity>
         <activity android:name="com.oraclechain.pe4devs.activity.DappActivity">
         </activity>
-        <activity android:name="com.oraclechain.pe4devs.activity.SetPasswordActivity">
+        <activity android:name="com.oraclechain.pe4devs.activity.SetWalletInfoActivity">
         </activity>
         <activity android:name="com.oraclechain.pe4devs.activity.MapAccountActivity">
         </activity>

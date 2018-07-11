@@ -26,7 +26,7 @@ package com.oraclechain.pe4devs.blockchain.types;
 import java.util.Arrays;
 
 /**
- * Created by swapnibble on 2017-09-12.
+ * Created by swapnibble on 2018-02-02.
  */
 
 public class TypeName implements EosType.Packer {

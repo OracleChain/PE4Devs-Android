@@ -33,12 +33,14 @@
             android:textSize="13sp"/>
 
         <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:ellipsize="end"
             android:gravity="center"
             android:maxEms="10"
+            android:maxLength="14"
             android:singleLine="true"
             android:text="调试Dapp"
             android:textColor="@color/title_color"

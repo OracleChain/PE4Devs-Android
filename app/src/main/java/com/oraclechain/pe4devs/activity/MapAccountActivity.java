@@ -143,6 +143,10 @@ public class MapAccountActivity extends AppCompatActivity {
                         accountBean.setAccount(accountName);
                         accountBean.setActive_public(mAccount_active_public_key);
                         accountBean.setOwner_public(mAccount_owner_public_key);
+                        accountBean.setName(mAccountBeanList.get(0).getName());
+                        accountBean.setImage(mAccountBeanList.get(0).getImage());
+                        accountBean.setPhone(mAccountBeanList.get(0).getPhone());
+                        accountBean.setUid(mAccountBeanList.get(0).getUid());
                         accountBean.setSha_pwd(mAccountBeanList.get(0).getSha_pwd());
                         try {
                             accountBean.setActive_pravite(EncryptUtil.getEncryptString(mAccount_active_private_key, userPassword));

@@ -105,6 +105,11 @@ public class BaseWebViewClient extends WebViewClient {
     @Override
     public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
         super.onReceivedSslError(view, handler, error);
+        if (error.getPrimaryError() == SslError.SSL_INVALID) {
+            handler.proceed();
+        } else {
+            handler.cancel();
+        }
     }
 
     /**

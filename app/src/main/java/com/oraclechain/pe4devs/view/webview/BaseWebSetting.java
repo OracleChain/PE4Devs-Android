@@ -32,6 +32,7 @@ public class BaseWebSetting {
         webSettings.setDatabaseEnabled(true);
         // 支持自动加载图片
         webSettings.setLoadsImagesAutomatically(hasKitkat());
+        webSettings.setUserAgentString("PocketEosAndroid");
         if (isCache) {
             // 设置 WebView 的缓存模式
             webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
@@ -41,6 +42,9 @@ public class BaseWebSetting {
             webSettings.setAppCacheMaxSize(8 * 1024 * 1024);
             // Android 私有缓存存储，如果你不调用setAppCachePath方法，WebView将不会产生这个目录
             webSettings.setAppCachePath(mContext.getCacheDir().getAbsolutePath());
+        }else {
+            // 设置 WebView 的缓存模式
+            webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
         }
         // 数据库路径
         if (!hasKitkat()) {

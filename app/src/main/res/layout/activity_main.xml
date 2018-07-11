@@ -34,7 +34,7 @@
             android:background="@color/blue_button"
             android:clickable="true"
             android:gravity="center"
-            android:text="设置密码"
+            android:text="设置信息"
             android:textColor="@color/white"
             android:textSize="14sp"/>
 

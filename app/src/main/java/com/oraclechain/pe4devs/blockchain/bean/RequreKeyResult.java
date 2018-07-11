@@ -3,7 +3,7 @@ package com.oraclechain.pe4devs.blockchain.bean;
 import java.util.List;
 
 /**
- * Created by pocketEos on 2018/4/26.
+ * Created by swapnibble on 2018-02-02.
  */
 
 public class RequreKeyResult {

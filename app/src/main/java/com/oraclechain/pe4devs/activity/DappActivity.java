@@ -1,24 +1,25 @@
 package com.oraclechain.pe4devs.activity;
 
-import android.net.http.SslError;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
-import android.webkit.SslErrorHandler;
-import android.webkit.WebChromeClient;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.oraclechain.pe4devs.R;
+import com.oraclechain.pe4devs.app.MyApplication;
 import com.oraclechain.pe4devs.util.KeyBoardUtil;
+import com.oraclechain.pe4devs.view.webview.BaseWebChromeClient;
 import com.oraclechain.pe4devs.view.webview.BaseWebSetting;
 import com.oraclechain.pe4devs.view.webview.BaseWebView;
+import com.oraclechain.pe4devs.view.webview.BaseWebViewClient;
+
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,12 +36,15 @@ public class DappActivity extends AppCompatActivity {
     @BindView(R.id.web_dapp_details)
     BaseWebView mWebDappDetails;
 
-    String url = null;
     @BindView(R.id.iv_back)
     ImageView mIvBack;
     @BindView(R.id.close)
     TextView mClose;
+    @BindView(R.id.title)
+    TextView mTitle;
 
+
+    String url = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,22 +52,11 @@ public class DappActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         // 开启辅助功能崩溃
-        mWebDappDetails.disableAccessibility(this);
+        mWebDappDetails.disableAccessibility(DappActivity.this);
         new BaseWebSetting(mWebDappDetails, DappActivity.this, false);//设置webseeting
+        mWebDappDetails.setWebViewClient(new BaseWebViewClient(this));
         mWebDappDetails.getSettings().setUserAgentString("PocketEosAndroid");
-        mWebDappDetails.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-                if (error.getPrimaryError() == SslError.SSL_INVALID) {
-                    handler.proceed();
-                } else {
-                    handler.cancel();
-                }
-            }
-        });
-        mWebDappDetails.getSettings().setJavaScriptEnabled(true);
         mWebDappDetails.addJavascriptInterface(new DappInterface(mWebDappDetails, this), "DappJsBridge");
-
         mIvBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,23 +91,19 @@ public class DappActivity extends AppCompatActivity {
 
     @OnClick(R.id.go)
     public void onViewClicked() {
+        mWebDappDetails.clearCache(true);
         url = "http://" + mUrl.getText().toString();
         if (KeyBoardUtil.isSoftInputShow(DappActivity.this)) {
             KeyBoardUtil.getInstance(DappActivity.this).hide();
         }
         mWebDappDetails.loadUrl(url);
-        mWebDappDetails.setWebChromeClient(new WebChromeClient() {
-            @Override
-            public void onProgressChanged(WebView view, int progress) {
-                if (progress == 100) {
-                    mProgressBar.setVisibility(View.GONE);//加载完网页进度条消失
-                    mWebDappDetails.loadUrl("javascript:getEosAccount('" + getIntent().getStringExtra("account") + "')");
-                } else {
-                    mProgressBar.setVisibility(View.VISIBLE);//开始加载网页时显示进度条
-                    mProgressBar.setProgress(progress);//设置进度值
-                }
-            }
-        });
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        hashMap.put("wallet_name", MyApplication.getDaoInstant().getAccountBeanDao().loadAll().get(0).getName());
+        hashMap.put("uid", MyApplication.getDaoInstant().getAccountBeanDao().loadAll().get(0).getUid());
+        hashMap.put("phone", MyApplication.getDaoInstant().getAccountBeanDao().loadAll().get(0).getPhone());
+        hashMap.put("image", MyApplication.getDaoInstant().getAccountBeanDao().loadAll().get(0).getImage());
+        hashMap.put("account", getIntent().getStringExtra("account"));
+        mWebDappDetails.setWebChromeClient(new BaseWebChromeClient(this, mProgressBar, mTitle,new Gson().toJson(hashMap).toString() ,getIntent().getStringExtra("account")));
     }
 
 }

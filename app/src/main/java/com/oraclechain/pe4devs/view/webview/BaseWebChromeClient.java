@@ -9,6 +9,7 @@ import android.webkit.JsResult;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 /**
  * Created by pocketEos on 2018/4/11.
@@ -17,10 +18,17 @@ import android.widget.ProgressBar;
 public class BaseWebChromeClient extends WebChromeClient {
     Context mContext;
     ProgressBar mProgressBar;
+    TextView mTextView;
+    String mInfo = null;
+    String mAccount = null;
 
-    public BaseWebChromeClient(Context context, ProgressBar progress) {
+
+    public BaseWebChromeClient(Context context, ProgressBar progress, TextView textView, String info, String account) {
         mContext = context;
         mProgressBar = progress;
+        mTextView = textView;
+        mInfo = info;
+        mAccount = account;
     }
 
     /**
@@ -34,7 +42,9 @@ public class BaseWebChromeClient extends WebChromeClient {
         super.onProgressChanged(view, newProgress);
         if (newProgress == 100) {
             mProgressBar.setVisibility(View.GONE);
-        }else {
+            view.loadUrl("javascript:getEosAccount('" + mAccount + "')");
+            view.loadUrl("javascript:getWalletWithAccount('" + mInfo + "')");
+        } else {
             mProgressBar.setVisibility(View.VISIBLE);//开始加载网页时显示进度条
             mProgressBar.setProgress(newProgress);//设置进度值
         }
@@ -49,6 +59,7 @@ public class BaseWebChromeClient extends WebChromeClient {
     @Override
     public void onReceivedTitle(WebView view, String title) {
         super.onReceivedTitle(view, title);
+        mTextView.setText(title);
     }
 
     /**

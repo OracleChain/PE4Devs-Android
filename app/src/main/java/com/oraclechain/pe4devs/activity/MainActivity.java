@@ -58,11 +58,11 @@ public class MainActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.set_pwd:
-                ActivityUtils.next(this, SetPasswordActivity.class);
+                ActivityUtils.next(this, SetWalletInfoActivity.class);
                 break;
             case R.id.import_map_account:
                 if (MyApplication.getDaoInstant().getAccountBeanDao().loadAll().size() == 0) {
-                    ToastUtils.showShortToast("请优先设置密码~");
+                    ToastUtils.showShortToast("请优先设置钱包信息~");
                     return;
                 } else {
                     ActivityUtils.next(this, MapAccountActivity.class);
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.import_account:
                 if (MyApplication.getDaoInstant().getAccountBeanDao().loadAll().size() == 0) {
-                    ToastUtils.showShortToast("请优先设置密码~");
+                    ToastUtils.showShortToast("请优先设置钱包信息~");
                     return;
                 } else {
                     ActivityUtils.next(this, MapAccountActivity.class);

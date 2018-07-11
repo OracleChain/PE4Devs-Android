@@ -26,10 +26,14 @@ public class AccountBean {
     private String active_public;
     private String active_pravite;
     private String sha_pwd;
-    @Generated(hash = 184266102)
+    private String image;
+    private String name;
+    private String uid;
+    private String phone;
+    @Generated(hash = 1392766597)
     public AccountBean(Long id, String account, String owner_public,
             String owner_pravite, String active_public, String active_pravite,
-            String sha_pwd) {
+            String sha_pwd, String image, String name, String uid, String phone) {
         this.id = id;
         this.account = account;
         this.owner_public = owner_public;
@@ -37,6 +41,10 @@ public class AccountBean {
         this.active_public = active_public;
         this.active_pravite = active_pravite;
         this.sha_pwd = sha_pwd;
+        this.image = image;
+        this.name = name;
+        this.uid = uid;
+        this.phone = phone;
     }
     @Generated(hash = 1267506976)
     public AccountBean() {
@@ -83,17 +91,29 @@ public class AccountBean {
     public void setSha_pwd(String sha_pwd) {
         this.sha_pwd = sha_pwd;
     }
-
-    @Override
-    public String toString() {
-        return "AccountBean{" +
-                "id=" + id +
-                ", account='" + account + '\'' +
-                ", owner_public='" + owner_public + '\'' +
-                ", owner_pravite='" + owner_pravite + '\'' +
-                ", active_public='" + active_public + '\'' +
-                ", active_pravite='" + active_pravite + '\'' +
-                ", sha_pwd='" + sha_pwd + '\'' +
-                '}';
+    public String getImage() {
+        return this.image;
     }
+    public void setImage(String image) {
+        this.image = image;
+    }
+    public String getName() {
+        return this.name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getUid() {
+        return this.uid;
+    }
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+    public String getPhone() {
+        return this.phone;
+    }
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
 }
