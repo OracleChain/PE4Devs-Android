@@ -156,7 +156,7 @@ eg：
 }
 
 
-旧版本转账二维码包含信息：
+旧版本收款二维码包含信息：
 
 {
 	"account_name": "oraclechain4",
@@ -167,7 +167,7 @@ eg：
 }
 
 
-新版本转账:
+新版本收款二维码:
 
 {
 	"quantity": "10",
@@ -179,7 +179,7 @@ eg：
 }
 
 
-执行多个action：
+执行多个action二维码：
 
 {
 	"type": "actions_QRCode",
