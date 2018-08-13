@@ -124,3 +124,103 @@ eg：
  
  	如果serialNumber为js端传进来的serialNumber，result为txid(eg:5cf2841c9f1d610d4aac2b8d586da21e2057f4188fdcc02dc4187f0f2d5b177b)，说明交易完成，
 
+
+4:PE二维码规则
+
+钱包二维码包含:
+
+{
+	"type": "wallet_QRCode",
+	"wallet_img": "http://pocketeos.oss-cn-beijing.aliyuncs.com/data/image/d553e2e94b9b888341fe1d572b6720b5.png?Expires=1832745966&OSSAccessKeyId=LTAIdWMZ4ikcYbmF&Signature=xMo1+Lv1CpiS5Mj0rTYO5UbLNT4=",
+	"wallet_name": "test",
+	"wallet_uid": "d553e2e94b9b888341fe1d572b6720b5"
+}
+
+
+帐号二维码包含:
+
+{
+	"account_img": "",
+	"account_name": "Oraclechain4",
+	"type": "account_QRCode"
+}
+
+
+账号私钥二维码包含:
+
+{
+	"account_name": "Oraclechain4",
+	"active_private_key": "5KJ***************************",
+	"owner_private_key": "5K2***************************",
+	"type": "account_priviate_key_QRCode"
+}
+
+
+旧版本转账二维码包含信息：
+
+{
+	"account_name": "oraclechain4",
+	"coin": "EOS",
+	"contract": "eosio.token",
+	"money": "10",
+	"type": "make_collections_QRCode"
+}
+
+
+新版本转账:
+
+{
+	"quantity": "10",
+	"contract": "eosio.token",
+	"account_name": "**********",
+	"token": "EOS",
+	"memo": "恭喜发财",
+	"type": "token_make_collections_QRCode"
+}
+
+
+执行多个action：
+
+{
+	"type": "actions_QRCode",
+	"actions": [{
+			"account": "eosio",
+			"name": "delegatebw",
+			"authorization": [{
+				"actor": "eosio",
+				"permission": "active"
+			}],
+			"data": {
+				"from": "eosio",
+				"receiver": "ha4tqmjxgege",
+				"stake_net_quantity": "4.0000 EOS",
+				"stake_cpu_quantity": "4.0000 EOS",
+				"transfer": 1
+			}
+		},
+		{
+			"account": "eosio.token",
+			"name": "transfer",
+			"authorization": [{
+				"actor": "eosio",
+				"permission": "active"
+			}],
+			"data": {
+				"from": "eosio",
+				"to": "ha4tqmjxgege",
+				"quantity": "2.0000 EOS",
+				"memo": "init"
+			}
+		}
+	]
+}
+
+
+
+
+
+
+
+
+
+
