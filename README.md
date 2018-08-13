@@ -192,7 +192,7 @@ eg：
 			}],
 			"data": {
 				"from": "eosio",
-				"receiver": "ha4tqmjxgege",
+				"receiver": "oraclechain4",
 				"stake_net_quantity": "4.0000 EOS",
 				"stake_cpu_quantity": "4.0000 EOS",
 				"transfer": 1
@@ -207,7 +207,7 @@ eg：
 			}],
 			"data": {
 				"from": "eosio",
-				"to": "ha4tqmjxgege",
+				"to": "oraclechain4",
 				"quantity": "2.0000 EOS",
 				"memo": "init"
 			}
