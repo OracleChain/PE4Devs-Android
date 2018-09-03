@@ -1,6 +1,8 @@
 # PE4Devs-Android
 Adaptation tool for PocketEOS dapps developers.
 
+[下载地址](https://github.com/OracleChain/PE4Devs-Android/releases/download/2.0/PE4Devs-Android.apk)
+
 
 进入页面需要检测User-Agent（android为：“PocketEosAndroid”，ios为“PocketEosIos”）判断加载页面来源是PocketEosAndroid或者是PocketEosIos
 
