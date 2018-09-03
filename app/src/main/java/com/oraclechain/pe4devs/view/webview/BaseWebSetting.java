@@ -26,13 +26,17 @@ public class BaseWebSetting {
         webSettings.setTextZoom(100);
         // 支持 Js 使用
         webSettings.setJavaScriptEnabled(true);
+        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+        webSettings.setBuiltInZoomControls(true);
         // 开启DOM缓存
         webSettings.setDomStorageEnabled(true);
         // 开启数据库缓存
         webSettings.setDatabaseEnabled(true);
         // 支持自动加载图片
         webSettings.setLoadsImagesAutomatically(hasKitkat());
-        webSettings.setUserAgentString("PocketEosAndroid");
+        // 自适应屏幕
+        webSettings.setUseWideViewPort(true);
+        webSettings.setLoadWithOverviewMode(true);
         if (isCache) {
             // 设置 WebView 的缓存模式
             webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
@@ -45,6 +49,8 @@ public class BaseWebSetting {
         }else {
             // 设置 WebView 的缓存模式
             webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+            // 支持启用缓存模式
+            webSettings.setAppCacheEnabled(false);
         }
         // 数据库路径
         if (!hasKitkat()) {
@@ -56,9 +62,18 @@ public class BaseWebSetting {
         // 关闭密码保存提醒功能
         webSettings.setSavePassword(false);
         // 支持缩放
-        webSettings.setSupportZoom(true);
+        webSettings.setSupportZoom(false);
+        // 隐藏原声缩放控件
+        webSettings.setDisplayZoomControls(false);
+        // 支持内容重新布局
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        webSettings.supportMultipleWindows();
+        webSettings.setSupportMultipleWindows(true);
+        // 支持插件
+        webSettings.setPluginState(WebSettings.PluginState.ON);
+        webSettings.setRenderPriority(WebSettings.RenderPriority.HIGH);
         // 设置 UserAgent 属性
-        webSettings.setUserAgentString("");
+        webSettings.setUserAgentString("PocketEosAndroid");
         // 允许加载本地 html 文件/false
         webSettings.setAllowFileAccess(true);
         // 允许通过 file url 加载的 Javascript 读取其他的本地文件,Android 4.1 之前默认是true，在 Android 4.1 及以后默认是false,也就是禁止
@@ -67,7 +82,10 @@ public class BaseWebSetting {
         // Android 4.1 之前默认是true，在 Android 4.1 及以后默认是false,也就是禁止
         // 如果此设置是允许，则 setAllowFileAccessFromFileURLs 不起做用
         webSettings.setAllowUniversalAccessFromFileURLs(false);
-
+        //同步请求图片
+        webSettings.setBlockNetworkImage(false);
+        // 设定编码格式
+        webSettings.setDefaultTextEncodingName("UTF-8");
     }
 
     private static boolean hasKitkat() {

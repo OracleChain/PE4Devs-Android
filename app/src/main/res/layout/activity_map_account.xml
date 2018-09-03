@@ -72,6 +72,7 @@
             android:background="@null"
             android:gravity="center_vertical"
             android:hint="请输入私钥"
+
             android:inputType="textImeMultiLine"
             android:textColor="@color/title_color"
             android:textColorHint="@color/txt_color"

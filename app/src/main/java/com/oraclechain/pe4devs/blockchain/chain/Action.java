@@ -97,7 +97,9 @@ public class Action implements EosType.Packer {
     public void setData(String data) {
         this.data = new JsonPrimitive(data);
     }
-
+    public void setData(JsonElement data) {
+        this.data = data;
+    }
     @Override
     public void pack(EosType.Writer writer) {
         account.pack(writer);

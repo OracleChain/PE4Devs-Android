@@ -5,6 +5,7 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.lzy.okgo.model.Response;
+import com.lzy.okgo.utils.OkLogger;
 import com.oraclechain.pe4devs.app.BaseUrl;
 import com.oraclechain.pe4devs.app.Constants;
 import com.oraclechain.pe4devs.bean.ResponseBean;
@@ -54,6 +55,10 @@ public class DappDatamanger {
 
     String contract, action, message, userpassword;
 
+    List<Action> actions = new ArrayList<>();//执行多个action
+    List<Action> json_toBin_actions = new ArrayList<>();//序列化之后的action
+    private int actionSize = 0;
+
     public DappDatamanger(Context context, String userpassword, Callback callback) {
         mCallback = callback;
         mContext = context;
@@ -78,6 +83,72 @@ public class DappDatamanger {
         this.action = action;
         permissions = new String[]{permissionAccount + "@" + PERMISSONION};
         getChainInfo();
+    }
+
+    public void pushActions(List<Action> actions) {    //执行多个action签名
+        this.actions = actions;
+        getActionsChainInfo();
+    }
+    public void getActionsChainInfo() {
+        HttpUtils.getRequets(BaseUrl.HTTP_get_chain_info, this, new HashMap<String, String>(), new JsonCallback<ResponseBean>() {
+            @Override
+            public void onSuccess(Response<ResponseBean> response) {
+                if (response.body().code == 0) {
+                    mChainInfoBean = (EosChainInfo) JsonUtil.parseStringToBean(mGson.toJson(response.body().data), EosChainInfo.class);
+                    OkLogger.i("----------------->" + actions.size());
+                    for (int i = 0; i < actions.size(); i++) {
+                        actions4abi_json_to_bin(actions.get(i));
+                    }
+                } else {
+                    if (ShowDialog.dialog != null) {
+                        ShowDialog.dissmiss();
+                    }
+                    ToastUtils.showLongToast(response.body().message);
+                    mCallback.erroMsg(new Gson().toJson(response.body().message));
+                }
+            }
+        });
+    }
+
+    public void actions4abi_json_to_bin(final Action action) {
+        JsonToBinRequest jsonToBinRequest = new JsonToBinRequest(action.getAccount(), action.getName(), mGson.toJson(action.getData()).replaceAll("\\r|\\n", ""));
+        HttpUtils.postRequest(BaseUrl.HTTP_get_abi_json_to_bin, this, mGson.toJson(jsonToBinRequest), new JsonCallback<ResponseBean>() {
+            @Override
+            public void onSuccess(Response<ResponseBean> response) {
+                if (response.body().code == 0) {
+                    mJsonToBeanResultBean = (JsonToBeanResultBean) JsonUtil.parseStringToBean(mGson.toJson(response.body().data), JsonToBeanResultBean.class);
+                    action.setData(mJsonToBeanResultBean.getBinargs());
+                    json_toBin_actions.add(action);
+                    actionSize += 1;
+                    if (actionSize == actions.size()) {
+                        txnBeforeSign = createTransactions(json_toBin_actions, mChainInfoBean);
+                        //扫描钱包列出所有可用账号的公钥
+                        List<String> pubKey = PublicAndPrivateKeyUtils.getActivePublicKey();
+                        getRequreKey(new GetRequiredKeys(txnBeforeSign, pubKey));
+                    }
+                } else {
+                    if (ShowDialog.dialog != null) {
+                        ShowDialog.dissmiss();
+                    }
+                    ToastUtils.showLongToast(response.body().message);
+                    mCallback.erroMsg(new Gson().toJson(response.body().message));
+                }
+            }
+        });
+
+    }
+
+    private SignedTransaction createTransactions(List<Action> actions, EosChainInfo chainInfo) {
+        SignedTransaction txn = new SignedTransaction();
+        txn.setActions(actions);
+        txn.putSignatures(new ArrayList<String>());
+
+        if (null != chainInfo) {
+            txn.setReferenceBlock(chainInfo.getHeadBlockId());
+            txn.setExpiration(chainInfo.getTimeAfterHeadBlockTime(30000));
+        }
+
+        return txn;
     }
     public void getChainInfo() {
         HttpUtils.getRequets(BaseUrl.HTTP_get_chain_info, this, new HashMap<String, String>(), new JsonCallback<ResponseBean>() {

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:gravity="bottom"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <TextView
+            android:id="@+id/close"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:drawableLeft="@mipmap/dapp_close"
+            android:gravity="center"
+            android:text="签名"
+            android:textColor="@color/title_color"
+            android:textSize="15sp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/line"/>
+
+        <com.oraclechain.pe4devs.view.convenientbanner.ConvenientBanner
+            android:id="@+id/action_details"
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            android:focusableInTouchMode="true"
+            app:canLoop="true"/>
+
+        <com.oraclechain.pe4devs.view.ClearEditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_toLeftOf="@+id/get_code"
+            android:background="@drawable/gray_line_broder"
+            android:gravity="center_vertical"
+            android:hint="输入钱包密码"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="@color/title_color"
+            android:textColorHint="@color/gray_color"
+            android:textSize="15sp"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/go_sign"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:background="#FFD8D8D8"
+        android:clickable="false"
+        android:text="确认签名"
+        android:textColor="@color/white"
+        android:textSize="15sp"/>
+</LinearLayout>
+
+
+

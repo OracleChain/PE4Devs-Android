@@ -100,7 +100,6 @@ public class DappActivity extends AppCompatActivity {
         HashMap<String, String> hashMap = new HashMap<String, String>();
         hashMap.put("wallet_name", MyApplication.getDaoInstant().getAccountBeanDao().loadAll().get(0).getName());
         hashMap.put("uid", MyApplication.getDaoInstant().getAccountBeanDao().loadAll().get(0).getUid());
-        hashMap.put("phone", MyApplication.getDaoInstant().getAccountBeanDao().loadAll().get(0).getPhone());
         hashMap.put("image", MyApplication.getDaoInstant().getAccountBeanDao().loadAll().get(0).getImage());
         hashMap.put("account", getIntent().getStringExtra("account"));
         mWebDappDetails.setWebChromeClient(new BaseWebChromeClient(this, mProgressBar, mTitle,new Gson().toJson(hashMap).toString() ,getIntent().getStringExtra("account")));
