@@ -39,14 +39,13 @@ eg：
   
   detail：
  {
-	"phone": "13900000000",
 	"account": "oraclechain4",
 	"uid": "46eec3f33e3d86a40c914a591922f420",
 	"wallet_name": "haha",
 	"image": ""
 }
 
-2-1：签名实现OCT或者EOS转账
+2-1：签名实现OCT或者EOS转账（以后不做维护，建议更换为pushActions）
  
 
 合约调用操作流程:在移动端进行完成，由移动端声明方法，传递数据。
@@ -73,8 +72,7 @@ Android端： window.DappJsBridge. pushAction(serialNumber，message, permission
 
 ios端：window.webkit.messageHandlers.pushAction.postMessage({serialNumber：'测试',message:'测试',permissionAccount:'测试'});
 
-2-2：签名实现智能合约调用（也可以进行transfer交易）
- 
+2-2：签名实现智能合约调用（也可以进行transfer交易，以后不做维护，建议更换为pushActions）
 
 合约调用操作流程:在移动端进行完成，由移动端声明方法，传递数据。
 
@@ -102,6 +100,55 @@ permissionAccount:eosio
 Android端： window.DappJsBridge. push(serialNumber，contract，action，message, permissionAccount)
 
 ios端：window.webkit.messageHandlers.push.postMessage({serialNumber：'测试',contract：'测试',action：'测试',message:'测试',permissionAccount:'测试'});
+
+2-3：支持多个action签名（也可同时进行多个transfer交易）
+合约调用操作流程:在移动端进行完成，由移动端声明方法，传递数据。
+
+方法：pushActions(String serialNumber，String actionsDetails)
+备注：dapp合约调用 传递serialNumber（发起交易流水号，用于同时发起多条交易txid的对应检测 , 该字段可以随意定制保持唯一性即可），actionsDetails(多个actions信息，以json形式传递),
+
+eg：
+
+{
+	"actions": [{
+			"account": "eosio",//合约名字
+			"name": "delegatebw",//合约action
+			"authorization": [{
+				"actor": "eosio",
+				"permission": "active"
+			}],
+			"data": {
+				"from": "eosio",
+				"receiver": "ha4tqmjxgege",
+				"stake_net_quantity": "4.0000 EOS",
+				"stake_cpu_quantity": "4.0000 EOS",
+				"transfer": 1
+			}
+		},
+		{
+			"account": "eosio.token",
+			"name": "transfer",
+			"authorization": [{
+				"actor": "eosio",
+				"permission": "active"
+			}],
+			"data": {
+				"from": "eosio",
+				"to": "ha4tqmjxgege",
+				"quantity": "2.0000 EOS",
+				"memo": "init"
+			}
+		}
+	]
+}
+
+
+调用：
+
+Android端： window.DappJsBridge. pushActions(serialNumber，actionsDetails)
+
+
+ios端：window.webkit.messageHandlers.pushActions.postMessage({serialNumber：'123456',actionsDetails：'测试'});
 
 
 3:获取txid
