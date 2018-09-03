@@ -102,6 +102,7 @@ Android端： window.DappJsBridge. push(serialNumber，contract，action，messa
 ios端：window.webkit.messageHandlers.push.postMessage({serialNumber：'测试',contract：'测试',action：'测试',message:'测试',permissionAccount:'测试'});
 
 2-3：支持多个action签名（也可同时进行多个transfer交易）
+
 合约调用操作流程:在移动端进行完成，由移动端声明方法，传递数据。
 
 方法：pushActions(String serialNumber，String actionsDetails)
