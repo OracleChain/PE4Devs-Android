@@ -1,9 +1,8 @@
 <h2>PE4Devs-Android Overview</h2>
 
-
 Adaptation tool for PocketEOS dapps developers.
 
-[下载地址](https://github.com/OracleChain/PE4Devs-Android/releases/download/2.0/PE4Devs-Android.apk)
+[Download Here](https://github.com/OracleChain/PE4Devs-Android/releases/download/2.0/PE4Devs-Android.apk)
 
 
 进入页面需要检测User-Agent（android为：“PocketEosAndroid”，ios为“PocketEosIos”）判断加载页面来源是PocketEosAndroid或者是PocketEosIos
@@ -13,7 +12,7 @@ Android端：
 整个交互JsInterface   name（the name used to expose the object in JavaScript） 为：DappJsBridge
 
 
-1-1：Dapp进入需要用户选择eos账号
+<h2>1-1：Dapp进入需要用户选择eos账号</h2>
 
 JS端声明方法，传递数据。方法名：getEosAccountDetails（String account）
 
@@ -27,7 +26,7 @@ eg：
     
   }
   
-1-2：Dapp进入获取钱包信息以及选中账号
+<h2>1-2：Dapp进入获取钱包信息以及选中账号</h2>
 
 JS端声明方法，传递数据。方法名：getWalletWithAccount（String detail） 
 
@@ -49,7 +48,7 @@ eg：
 	"image": ""
 }
 
-2-1：签名实现OCT或者EOS转账（以后不做维护，建议更换为pushActions）
+<h2>2-1：签名实现OCT或者EOS转账（以后不做维护，建议更换为pushActions）</h2>
  
 
 合约调用操作流程:在移动端进行完成，由移动端声明方法，传递数据。
@@ -76,7 +75,7 @@ Android端： window.DappJsBridge. pushAction(serialNumber，message, permission
 
 ios端：window.webkit.messageHandlers.pushAction.postMessage({serialNumber：'测试',message:'测试',permissionAccount:'测试'});
 
-2-2：签名实现智能合约调用（也可以进行transfer交易，以后不做维护，建议更换为pushActions）
+<h2>2-2：签名实现智能合约调用（也可以进行transfer交易，以后不做维护，建议更换为pushActions）</h2>
 
 合约调用操作流程:在移动端进行完成，由移动端声明方法，传递数据。
 
@@ -105,7 +104,7 @@ Android端： window.DappJsBridge. push(serialNumber，contract，action，messa
 
 ios端：window.webkit.messageHandlers.push.postMessage({serialNumber：'测试',contract：'测试',action：'测试',message:'测试',permissionAccount:'测试'});
 
-2-3：支持多个action签名（也可同时进行多个transfer交易）
+<h2>2-3：支持多个action签名（也可同时进行多个transfer交易）</h2>
 
 合约调用操作流程:在移动端进行完成，由移动端声明方法，传递数据。
 
@@ -156,7 +155,7 @@ Android端： window.DappJsBridge. pushActions(serialNumber，actionsDetails)
 ios端：window.webkit.messageHandlers.pushActions.postMessage({serialNumber：'123456',actionsDetails：'测试'});
 
 
-3:获取txid
+<h2>3:获取txid</h2>
 
 JS端声明方法，传递数据。方法名：pushActionResult（String serialNumber,String result）
 备注:该方法，无论采用什么前端框架，都需要暴露在window全局下。
@@ -177,7 +176,7 @@ eg：
  	如果serialNumber为js端传进来的serialNumber，result为txid(eg:5cf2841c9f1d610d4aac2b8d586da21e2057f4188fdcc02dc4187f0f2d5b177b)，说明交易完成，
 
 
-4:PE二维码规则
+<h2>4:PE二维码规则</h2>
 
 钱包二维码包含:
 
