@@ -8,40 +8,55 @@ Adaptation tool for PocketEOS dapps developers.
 <h2 id="2">How to specific an eos account to test in PE4Devs</h2>
 
 1.set wallet info
+
 2.import an eos account
+
 3.get the eos account list
+
 4.choice one
+
 5.input an EosProxyServer address(http://localhost:8080) and start TEST. 
 
 
 <h2 id="3">Preparation</h2>
 
 1.Detect User-Agent in your webapp :
+
 Android: "PocketEosAndroid", 
+
 IOS: "PocketEosIos"
 
 2.Android specification:
+
 JsInterface Name(the name used to expose the object in JavaScript): DappJsBridge
 
-3.enter webapp's url, and we'll return the PE language enviroment: 
+3.enter webapp's url, and we'll return the PE language enviroment:
+
 url+"?language=Chinese"
+
 url+"?language=English"
 
 
 
 <h2 id="4">Get Wallet Info</h2>
+
 1.wallet info
+
 Use js to declare a function named getWalletWithAccount to transfer the wallet Info
+
 tips: need to expose it under global window.The format of "detail" string is in JSON.
+
 
 eg:
 function getWalletWithAccount(String detail){
 }
+
 detail：{"account":"eosio","uid":"46eec3f33e3d86a40c914a591922f420","wallet_name":"haha","image":""}
 
 2.eos account info
 
 Use js to declare a function named getEosAccount to transfer the Account Info
+
 tips: need to expose it under global window.The format of "account" is in String.
 
 eg:
@@ -57,6 +72,7 @@ Support multiple action signatures (multiple transfer transactions can also be p
 The contract calls the operation flow: the completion is done on the mobile side, and the data is passed by the mobile end declaration method.
 
 Method: pushActions(String serialNumber, String actionsDetails) 
+
 Remarks: dapp contract call to pass serialNumber (initiate transaction serial number, used to initiate corresponding detection of multiple transactions txid at the same time, this field can be customized to maintain uniqueness), actionsDetails (multiple Action information, passed in json form),
 
 eg：
