@@ -123,7 +123,7 @@ Android: window.DappJsBridge.pushActions(serialNumber，actionsDetails)
 IOS: window.webkit.messageHandlers.pushActions.postMessage({serialNumber：'123456',actionsDetails：'TEST'});
 
 
-<h2 id="6">Require txid</h2>
+<h2 id="6">Use a serial number to get txid</h2>
 
 1.The JS side declares methods to pass data. 
 
