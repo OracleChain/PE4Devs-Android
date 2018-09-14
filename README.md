@@ -61,6 +61,7 @@ tips: need to expose it under global window.The format of "account" is in String
 
 eg:
 function getEosAccount(String account){
+
 }
 
 
@@ -76,6 +77,7 @@ Method: pushActions(String serialNumber, String actionsDetails)
 Remarks: dapp contract call to pass serialNumber (initiate transaction serial number, used to initiate corresponding detection of multiple transactions txid at the same time, this field can be customized to maintain uniqueness), actionsDetails (multiple Action information, passed in json form),
 
 eg：
+
 {
   "actions": [
     {
@@ -115,7 +117,9 @@ eg：
 }
 
 Call Method Below:
+
 Android: window.DappJsBridge.pushActions(serialNumber，actionsDetails)
+
 IOS: window.webkit.messageHandlers.pushActions.postMessage({serialNumber：'123456',actionsDetails：'TEST'});
 
 
@@ -128,14 +132,16 @@ Method name: pushActionResult(String serialNumber, String result)
 Remarks: This method, regardless of the front-end framework, needs to be exposed to the window global. 
 
 Eg:
+
 //Get the transaction txid and the corresponding serial number to help detect the transaction information. 
 function pushActionResult(String serialNumber,String result) {
+
 } 
 
 
 2.Transaction interrupt or exception:
 
-If serialNumber is the serialNumber passed in to js, ​​result is "ERROR:{"code":3050003,"what":"eosio_assert_message assertion failure","name":"eosio_assert_message_exception","details":[]}", this When result is the error message on the chain (all error messages will start with ERROR, you can check if the transaction is wrong by checking ERROR.)
+If serialNumber is the serialNumber passed in to js, result is "ERROR:{"code":3050003,"what":"eosio_assert_message assertion failure","name":"eosio_assert_message_exception","details":[]}", this When result is the error message on the chain (all error messages will start with ERROR, you can check if the transaction is wrong by checking ERROR.)
 
 If serialNumber is passed in the serialNumber js end, result is "ERROR: you enter the wrong password, enter ~ Please check again", or result is "ERROR:.. Password is invalid Please check it" illustrates the password is wrong.
 
