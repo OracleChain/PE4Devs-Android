@@ -11,7 +11,7 @@ Adaptation tool for PocketEOS dapps developers.
 
 2.import an eos account
 
-3.get the eos account list
+3.check the eos account list
 
 4.choice one
 
