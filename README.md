@@ -66,7 +66,7 @@ function getEosAccount(String account){
 
 
 <h2 id="5">Make Transactions</h2>
-[PIC]()
+[](https://github.com/OracleChain/PE4Devs-Android/raw/master/app/src/main/res/mipmap-hdpi/pe4dev01.png)
 
 Support multiple action signatures (multiple transfer transactions can also be performed at the same time)
 
